@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-doop-staging-81604-authRole",
+      "UnauthRoleArn": "arn:aws:iam::466069387312:role/amplify-doop-staging-81604-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::466069387312:role/amplify-doop-staging-81604-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-doop-staging-81604-deployment",
+      "UnauthRoleName": "amplify-doop-staging-81604-unauthRole",
+      "StackName": "amplify-doop-staging-81604",
+      "StackId": "arn:aws:cloudformation:us-east-2:466069387312:stack/amplify-doop-staging-81604/35626740-8cfd-11ee-8536-02c8d1225853",
+      "AmplifyAppId": "d2qqi6y2sy1a0t"
+    },
+    "categories": {
+      "auth": {
+        "Doop": {}
+      }
+    }
+  }
+}

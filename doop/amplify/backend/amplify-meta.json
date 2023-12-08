@@ -1,0 +1,92 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-doop-staging-81604-authRole",
+      "UnauthRoleArn": "arn:aws:iam::466069387312:role/amplify-doop-staging-81604-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::466069387312:role/amplify-doop-staging-81604-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-doop-staging-81604-deployment",
+      "UnauthRoleName": "amplify-doop-staging-81604-unauthRole",
+      "StackName": "amplify-doop-staging-81604",
+      "StackId": "arn:aws:cloudformation:us-east-2:466069387312:stack/amplify-doop-staging-81604/35626740-8cfd-11ee-8536-02c8d1225853",
+      "AmplifyAppId": "d2qqi6y2sy1a0t"
+    }
+  },
+  "api": {
+    "Doop": {
+      "dependsOn": [],
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AWS_IAM"
+            }
+          ],
+          "defaultAuthentication": {
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 30,
+              "description": "api key description"
+            },
+            "authenticationType": "API_KEY"
+          }
+        },
+        "GraphQLAPIIdOutput": "6w5dw73hingl3aw3vvfy6dli3i",
+        "GraphQLAPIEndpointOutput": "https://axdqrcofdvhwthgntx2i2gg4hy.appsync-api.us-east-2.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-dh6ilxxuwrccfhj35i73d3iaca"
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync",
+      "lastPushTimeStamp": "2023-12-03T07:29:48.950Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-doop-staging-81604-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apiDoop"
+      }
+    }
+  },
+  "auth": {
+    "Doop": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": [
+            "REQUIRES_LOWERCASE",
+            "REQUIRES_NUMBERS",
+            "REQUIRES_SYMBOLS",
+            "REQUIRES_UPPERCASE"
+          ]
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-doop-staging-81604-deployment/amplify-cfn-templates/auth/Doop-cloudformation-template.json",
+        "logicalId": "authDoop"
+      },
+      "lastPushTimeStamp": "2023-12-03T07:29:48.952Z",
+      "output": {
+        "UserPoolId": "us-east-2_tOfynpJ5h",
+        "AppClientIDWeb": "5he8enjv4cmfcamlm3obv07mof",
+        "AppClientID": "76karkm9tpk93uicusgloblafv",
+        "IdentityPoolId": "us-east-2:7707383d-a6f8-4947-934d-5cb2f1a0892a",
+        "UserPoolArn": "arn:aws:cognito-idp:us-east-2:466069387312:userpool/us-east-2_tOfynpJ5h",
+        "IdentityPoolName": "testAuthIdentityPool__staging",
+        "UserPoolName": "Doop"
+      },
+      "lastPushDirHash": "LS/kRyK/z0L9wpf0leINHStDADI="
+    }
+  }
+}

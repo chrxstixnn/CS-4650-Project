@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@aws-amplify/ui-react": "^6.0.3",
+    "aws-amplify": "^6.0.5"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+  }
+}

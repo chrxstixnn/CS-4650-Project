@@ -1,0 +1,284 @@
+type Comments @aws_iam @aws_api_key {
+  id: ID!
+  text: String
+  postsID: ID!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Posts @aws_iam @aws_api_key {
+  id: ID!
+  Text: String
+  Title: String
+  Comments(filter: ModelCommentsFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelCommentsConnection
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+input ModelStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelBooleanInput {
+  ne: Boolean
+  eq: Boolean
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelSubscriptionStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  in: [String]
+  notIn: [String]
+}
+
+input ModelSubscriptionIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  in: [Int]
+  notIn: [Int]
+}
+
+input ModelSubscriptionFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  in: [Float]
+  notIn: [Float]
+}
+
+input ModelSubscriptionBooleanInput {
+  ne: Boolean
+  eq: Boolean
+}
+
+input ModelSubscriptionIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  in: [ID]
+  notIn: [ID]
+}
+
+enum ModelAttributeTypes {
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+  _null
+}
+
+input ModelSizeInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelCommentsConnection @aws_api_key @aws_iam {
+  items: [Comments]!
+  nextToken: String
+}
+
+input ModelCommentsFilterInput {
+  id: ModelIDInput
+  text: ModelStringInput
+  postsID: ModelIDInput
+  and: [ModelCommentsFilterInput]
+  or: [ModelCommentsFilterInput]
+  not: ModelCommentsFilterInput
+}
+
+type Query {
+  getComments(id: ID!): Comments @aws_api_key @aws_iam
+  listComments(filter: ModelCommentsFilterInput, limit: Int, nextToken: String): ModelCommentsConnection @aws_api_key @aws_iam
+  commentsByPostsID(postsID: ID!, sortDirection: ModelSortDirection, filter: ModelCommentsFilterInput, limit: Int, nextToken: String): ModelCommentsConnection @aws_api_key @aws_iam
+  getPosts(id: ID!): Posts @aws_api_key @aws_iam
+  listPosts(filter: ModelPostsFilterInput, limit: Int, nextToken: String): ModelPostsConnection @aws_api_key @aws_iam
+}
+
+input ModelCommentsConditionInput {
+  text: ModelStringInput
+  postsID: ModelIDInput
+  and: [ModelCommentsConditionInput]
+  or: [ModelCommentsConditionInput]
+  not: ModelCommentsConditionInput
+}
+
+input CreateCommentsInput {
+  id: ID
+  text: String
+  postsID: ID!
+}
+
+input UpdateCommentsInput {
+  id: ID!
+  text: String
+  postsID: ID
+}
+
+input DeleteCommentsInput {
+  id: ID!
+}
+
+type Mutation {
+  createComments(input: CreateCommentsInput!, condition: ModelCommentsConditionInput): Comments @aws_api_key @aws_iam
+  updateComments(input: UpdateCommentsInput!, condition: ModelCommentsConditionInput): Comments @aws_api_key @aws_iam
+  deleteComments(input: DeleteCommentsInput!, condition: ModelCommentsConditionInput): Comments @aws_api_key @aws_iam
+  createPosts(input: CreatePostsInput!, condition: ModelPostsConditionInput): Posts @aws_api_key @aws_iam
+  updatePosts(input: UpdatePostsInput!, condition: ModelPostsConditionInput): Posts @aws_api_key @aws_iam
+  deletePosts(input: DeletePostsInput!, condition: ModelPostsConditionInput): Posts @aws_api_key @aws_iam
+}
+
+input ModelSubscriptionCommentsFilterInput {
+  id: ModelSubscriptionIDInput
+  text: ModelSubscriptionStringInput
+  postsID: ModelSubscriptionIDInput
+  and: [ModelSubscriptionCommentsFilterInput]
+  or: [ModelSubscriptionCommentsFilterInput]
+}
+
+type Subscription {
+  onCreateComments(filter: ModelSubscriptionCommentsFilterInput): Comments @aws_subscribe(mutations: ["createComments"]) @aws_api_key @aws_iam
+  onUpdateComments(filter: ModelSubscriptionCommentsFilterInput): Comments @aws_subscribe(mutations: ["updateComments"]) @aws_api_key @aws_iam
+  onDeleteComments(filter: ModelSubscriptionCommentsFilterInput): Comments @aws_subscribe(mutations: ["deleteComments"]) @aws_api_key @aws_iam
+  onCreatePosts(filter: ModelSubscriptionPostsFilterInput): Posts @aws_subscribe(mutations: ["createPosts"]) @aws_api_key @aws_iam
+  onUpdatePosts(filter: ModelSubscriptionPostsFilterInput): Posts @aws_subscribe(mutations: ["updatePosts"]) @aws_api_key @aws_iam
+  onDeletePosts(filter: ModelSubscriptionPostsFilterInput): Posts @aws_subscribe(mutations: ["deletePosts"]) @aws_api_key @aws_iam
+}
+
+type ModelPostsConnection @aws_api_key @aws_iam {
+  items: [Posts]!
+  nextToken: String
+}
+
+input ModelPostsFilterInput {
+  id: ModelIDInput
+  Text: ModelStringInput
+  Title: ModelStringInput
+  and: [ModelPostsFilterInput]
+  or: [ModelPostsFilterInput]
+  not: ModelPostsFilterInput
+}
+
+input ModelPostsConditionInput {
+  Text: ModelStringInput
+  Title: ModelStringInput
+  and: [ModelPostsConditionInput]
+  or: [ModelPostsConditionInput]
+  not: ModelPostsConditionInput
+}
+
+input CreatePostsInput {
+  id: ID
+  Text: String
+  Title: String
+}
+
+input UpdatePostsInput {
+  id: ID!
+  Text: String
+  Title: String
+}
+
+input DeletePostsInput {
+  id: ID!
+}
+
+input ModelSubscriptionPostsFilterInput {
+  id: ModelSubscriptionIDInput
+  Text: ModelSubscriptionStringInput
+  Title: ModelSubscriptionStringInput
+  and: [ModelSubscriptionPostsFilterInput]
+  or: [ModelSubscriptionPostsFilterInput]
+}

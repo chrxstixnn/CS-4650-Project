@@ -1,0 +1,7 @@
+{
+    "AppSyncApiName": "Doop",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": false,
+    "S3DeploymentBucket": "amplify-doop-staging-81604-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/6b6afc37faa67c963ec982d33dafc2afa238a5c6"
+}
